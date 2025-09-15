@@ -1,0 +1,59 @@
+import java.util.*;
+
+class Laptop {
+    int id;
+    String brand;
+    String model;
+    double price;
+
+    Laptop(int id, String brand, String model, double price) {
+        this.id = id;
+        this.brand = brand;
+        this.model = model;
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return id + " - " + brand + " " + model + " ($" + price + ")";
+    }
+}
+
+public class LaptopCatalog {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Create a catalog (list of laptops)
+        List<Laptop> catalog = new ArrayList<>();
+        catalog.add(new Laptop(1, "Dell", "Inspiron 15", 650.00));
+        catalog.add(new Laptop(2, "HP", "Pavilion 14", 700.00));
+        catalog.add(new Laptop(3, "Lenovo", "ThinkPad X1", 1200.00));
+        catalog.add(new Laptop(4, "Apple", "MacBook Air", 999.99));
+        catalog.add(new Laptop(5, "Asus", "ROG Zephyrus", 1500.00));
+
+        System.out.println("===== Laptop Catalog =====");
+        for (Laptop l : catalog) {
+            System.out.println(l);
+        }
+
+        // User laptop request
+        System.out.print("\nEnter Laptop ID to request: ");
+        int requestId = scanner.nextInt();
+
+        Laptop requested = null;
+        for (Laptop l : catalog) {
+            if (l.id == requestId) {
+                requested = l;
+                break;
+            }
+        }
+
+        if (requested != null) {
+            System.out.println("✅ You requested: " + requested);
+        } else {
+            System.out.println("❌ Laptop with ID " + requestId + " not found.");
+        }
+
+        scanner.close();
+    }
+}
